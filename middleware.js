@@ -4,18 +4,6 @@ export function middleware(request) {
   const userAgent = request.headers.get('user-agent') || '';
   const url = new URL(request.url);
 
-  console.log('midleware', url.pathname);
-
-  let needsReDirect = url?.pathname?.includes('/wp-content/uploads');
-
-  if(needsReDirect) {
-    return NextResponse.redirect(`https://animalp4radise.com${url.pathname}`);
-  }
-
-  console.log(needsReDirect);
-
-
-
   // Extract the first part after the base URL as the postid parameter
   const pathParts = url.pathname.split('/').filter(part => part !== ''); // Split and remove empty parts
   const postid = pathParts.length > 0 ? pathParts[0] : '';
@@ -29,7 +17,7 @@ export function middleware(request) {
   } else {    
       // Redirect to https://animalp4radise.com/postid if request is from facebook referer
     if (isRefererFacebook) {
-      return NextResponse.redirect(`https://animalp4radise.com/${postid}`);
+      return NextResponse.redirect(`${process.env.website_url}/${postid}`);
     }   
   }
 
