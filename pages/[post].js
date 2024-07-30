@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Head from 'next/head';
-export const runtime = 'edge';
+export const runtime = 'experimental-edge';
 const Post = (post) => {
 
     const [title, setTitle] = useState('');
