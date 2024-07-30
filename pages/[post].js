@@ -8,15 +8,8 @@ const Post = (post) => {
     const [title, setTitle] = useState('');
     const [featuredImage, setFeaturedImage] = useState('');
 
-    console.log('is calling from here', post);
-
-
-    useEffect( ()=>{
-
-        setTitle(post.response.title.rendered);
-        setFeaturedImage(post.response.yoast_head_json.og_image[0].url);
-        
-  },[]);
+    setTitle(post.response.title.rendered);
+    setFeaturedImage(post.response.yoast_head_json.og_image[0].url);
 
     return (
     <div>
