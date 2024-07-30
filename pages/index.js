@@ -7,9 +7,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  // useEffect(()=>{
-  //   console.log(post);
-  // },[]); 
 
   return (
     <>
@@ -26,15 +23,3 @@ export default function Home() {
   )
 }
 
-// Home.getInitialProps = async ({ req }) => {
-//   let userIP
-//   if (req) {
-//     userIP = req.headers['x-real-ip'] || req.connection.remoteAddress
-//   }
-
-//   const baseUrl = 'https://animalp4radise.com';
-//             let response = await fetch(`${baseUrl}/wp-json/wp/v2/posts/13554`)
-//             response = await response.json();
-//             console.log(response);
-//   return { response }
-// }
