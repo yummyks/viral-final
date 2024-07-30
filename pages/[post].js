@@ -5,20 +5,18 @@ import Head from 'next/head';
 export const runtime = 'experimental-edge';
 const Post = (post) => {
 
-    const [title, setTitle] = useState('');
-    const [featuredImage, setFeaturedImage] = useState('');
+    const [title, setTitle] = useState(post?.response?.title?.rendered ? post.response.title.rendered : '');
+    const [featuredImage, setFeaturedImage] = useState(post?.response?.yoast_head_json?.og_image[0]?.url ? post.response.yoast_head_json.og_image[0].url : '');
 
-    // setTitle(post.response.title.rendered);
-    // setFeaturedImage(post.response.yoast_head_json.og_image[0].url);
     return (
     <div>
       <Head>
         <title>Chinesse</title>
-        <meta property="og:image" content={post.response.yoast_head_json.og_image[0].url} key="image" />
+        <meta property="og:image" content={featuredImage} key="image" />
       </Head>
       <main>
-        <h1>{post.response.title.rendered}</h1>
-        <img src={post.response.yoast_head_json.og_image[0].url}/>
+        <h1>{title}</h1>
+        <img src={featuredImage}/>
       </main>
     </div>
     )
@@ -27,10 +25,8 @@ const Post = (post) => {
 export default Post;
 
 Post.getInitialProps = async ({ req }) => {
-    
     const baseUrl = 'https://animalp4radise.com';
-              let response = await fetch(`${baseUrl}/wp-json/wp/v2/posts/13554`)
+              let response = await fetch(`${baseUrl}/wp-json/wp/v2/posts${req.url}`)
               response = await response.json();
-              console.log(response);
     return { response }
 }
